@@ -11,6 +11,8 @@ name = "pypi"
 
 [packages]
 
+"boto3" = "*"
+click = "*"
 
 
 [requires]
