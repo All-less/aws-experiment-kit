@@ -7,12 +7,16 @@ name = "pypi"
 
 [dev-packages]
 
+wheel = "*"
 
 
 [packages]
 
 "boto3" = "*"
 click = "*"
+halo = "*"
+pymongo = "*"
+paramiko = "*"
 
 
 [requires]

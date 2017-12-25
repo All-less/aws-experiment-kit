@@ -543,3 +543,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/tex,vim,macos,latex,linux,windows,sublimetext,python
+
+### Project Specific ###
+
+config/
