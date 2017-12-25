@@ -1,8 +1,8 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(
-    name = 'exp-kit',
-    packages = [ 'exp-kit' ],
+    name = 'expkit',
+    packages = find_packages(),
     version = '0.0.1',
     description = 'A bunch of scripts facilitating experimentation on AWS.',
     author = 'All-less',
@@ -10,7 +10,7 @@ setup(
     url = 'https://github.com/All-less/aws-experiment-kit',
     entry_points = {
         'console_scripts': [
-            'exp-kit = exp-kit.cli:main'
+            'expkit=expkit.cli:main'
         ]
     },
     keywords = [ 'aws' ],
