@@ -98,7 +98,7 @@ def get_session(ip, username):
     sftp = ssh.open_sftp()
     return ssh, sftp
 
-def store_collection(cluster_name, request_id, instance_id_list):
+def store_cluster(cluster_name, request_id, instance_id_list):
     env['collection'].update(
         { 'name': cluster_name },
         { 'name': cluster_name, 'request_id': request_id, 'instance_id_list': instance_id_list },

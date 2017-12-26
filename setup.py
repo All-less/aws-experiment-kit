@@ -2,8 +2,8 @@ from setuptools import setup, find_packages
 
 setup(
     name = 'exp-kit',
-    packages = find_packages(exclude=('scripts', 'config')),
-    version = '0.0.2',
+    packages = find_packages(exclude=('config')),
+    version = '0.0.4',
     description = 'A bunch of scripts facilitating experimentation on AWS.',
     author = 'All-less',
     author_email = 'all.less.mail@gmail.com',
