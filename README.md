@@ -95,7 +95,19 @@ exp-kit rm <cluster_name>
 
 ##### List cluster information
 
+To list all clusters, use `ls` command directly.
+
 ```
 exp-kit ls
 ```
 
+To inspect a specific cluster, add its name as an option.
+
+```
+exp-kit ls <cluster_name>
+```
+
+### Under the hood
+
+1. cluster
+2. `master`

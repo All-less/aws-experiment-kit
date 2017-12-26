@@ -28,7 +28,7 @@ def get_request_config(cluster_config):
         'LaunchSpecifications': [{
             'ImageId': cluster_config['image_id'],
             'KeyName': cluster_config['key_name'],
-            'InstanceType': cluster_config['instance'],
+            'InstanceType': cluster_config['instance_type'],
             'BlockDeviceMappings': [{
                 'VirtualName': 'Root',
                 'DeviceName': '/dev/sda1',
@@ -49,7 +49,22 @@ def get_request_config(cluster_config):
         'AllocationStrategy': 'lowestPrice',
         'Type': 'request'
     }
-    return base
+    return diversify_instance_type(base, cluster_config)
+
+def diversify_instance_type(req_config, cluster_config):
+    if type(cluster_config['instance_type']) is str:
+        return req_config
+    elif type(cluster_config['instance_type']) is list:
+        spec = req_config['LaunchSpecifications'][0]
+        req_config['AllocationStrategy'] = 'diversified'
+        req_config['LaunchSpecifications'] = []
+        for type_ in cluster_config['instance_type']:
+            spec_template = copy.deepcopy(spec)
+            spec_template['InstanceType'] = type_
+            req_config['LaunchSpecifications'].append(spec_template)
+        return req_config
+    else:
+        utils.error('Unrecognized instance_type field: {}'.format(cluster_config['instance_type']))
 
 def send_request(client, config):
     """

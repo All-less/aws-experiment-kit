@@ -43,13 +43,15 @@ def new(cluster_config):
     \b
     An example config.json looks as follows.
     {
-        "name": "cluster-name",
+        "name": "cluster",
         "size": 3,
-        "instance": "m4.large",
-        "image_id": "ami-xxxxxxxx",
-        "snapshot_id": "snap-xxxxxxx",
+        "instance_type": "m4.large",
+        "image_id": "ami-a51f27c5",
+        "snapshot_id": "snap-0907c7634681bc477",
+        "security_group_id": "sg-c36280ba",
         "disk_size": 20,
-        "spot_price": 0.251
+        "spot_price": 0.251,
+        "user_name": "ec2-user"
     }
     """
     default_config = {
@@ -79,11 +81,15 @@ def rm(cluster_name):
     rm_cluster.rm(cluster_name)
 
 @main.command()
-def ls():
+@click.argument('cluster-name', type=str)
+def ls(cluster_name):
     """
     List all cluster information.
     """
-    ls_cluster.ls()
+    if cluster_name is None:
+        ls_cluster.ls_all()
+    else:
+        ls_cluster.ls(cluster_name)
 
 if __name__ == '__main__':
     main()
