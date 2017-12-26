@@ -5,7 +5,7 @@ import click
 from . import utils
 
 
-def remove(cluster_name):
+def rm(cluster_name):
     client = boto3.client('ec2')
     cluster_name = utils.match_cluster_name(cluster_name)
     styled_name = click.style(cluster_name, bold=True)

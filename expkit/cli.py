@@ -5,7 +5,8 @@ import os
 import click
 
 from . import new_cluster
-from . import del_cluster
+from . import rm_cluster
+from . import ls_cluster
 from . import utils
 
 
@@ -69,11 +70,18 @@ def new(cluster_config):
 
 @main.command()
 @click.argument('cluster-name', type=str)
-def remove(cluster_name):
+def rm(cluster_name):
     """
     Destroy a cluster by cancelling the spot request.
     """
-    del_cluster.remove(cluster_name)
+    rm_cluster.rm(cluster_name)
+
+@main.command()
+def ls():
+    """
+    List all cluster information.
+    """
+    ls_cluster.ls()
 
 if __name__ == '__main__':
     main()

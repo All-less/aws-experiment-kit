@@ -134,3 +134,6 @@ def get_request_id(cluster_name):
 
 def delete_cluster_information(cluster_name):
     env['collection'].remove({ 'name': cluster_name })
+
+def load_all_clusters():
+    return list(env['collection'].find())

@@ -13,7 +13,8 @@ setup(
         'boto3',
         'halo',
         'pymongo',
-        'paramiko'
+        'paramiko',
+        'tabulate'
     ],
     entry_points = {
         'console_scripts': [
