@@ -3,11 +3,11 @@ from setuptools import setup, find_packages
 setup(
     name = 'exp-kit',
     packages = find_packages(exclude=('config')),
-    version = '0.0.4',
-    description = 'A bunch of scripts facilitating experimentation on AWS.',
+    version = '0.0.5',
+    description = 'A CLI tool facilitating experimentation on AWS.',
     author = 'All-less',
     author_email = 'all.less.mail@gmail.com',
-    url = 'https://github.com/All-less/aws-experiment-kit',
+    url = 'https://github.com/All-less/exp-kit',
     install_requires = [
         'click',
         'boto3',

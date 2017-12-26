@@ -12,7 +12,7 @@ from . import utils
 
 @click.group()
 @click.option('-u', '--user-config',
-              type=click.Path(resolve_path=True, exists=True),
+              type=click.Path(resolve_path=True),
               help='Path to user configuration.',
               default=os.path.join(os.path.expanduser('~'), '.exp-kit/config.json'))
 def main(user_config):
@@ -25,7 +25,9 @@ def main(user_config):
         "key_name": "key-pair-name",
         "iam_fleet_role": "something:like:this::<aws-id>:role/aws-ec2-spot-fleet-tagging-role",
         "public_keys": [ "ssh-rsa XXXX key-pair-name" ],
-        "key_path": "/path/to/key-pair-name.pem"
+        "key_path": "/path/to/key-pair-name.pem",
+        "mongo_host": "localhost",
+        "mongo_port": 27017
     }
     """
     utils.load_user_config(user_config)

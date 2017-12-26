@@ -21,7 +21,10 @@ logging.getLogger('boto3').setLevel(logging.WARN)
 logging.getLogger('paramiko').setLevel(logging.WARN)
 
 env = {
-    'user_config': {},
+    'user_config': {
+        'mongo_host': 'localhost',
+        'mongo_port': 27017
+    },
     'collection': None
 }
 
@@ -39,11 +42,19 @@ def info(content):
     click.echo(content)
 
 def load_user_config(path):
-    env['user_config'] = parse_json_file(path)
+    env['user_config'].update(parse_json_file(path))
     for key in [ 'key_path', 'key_name', 'iam_fleet_role', 'public_keys' ]:
         if key not in env['user_config']:
             error('Missing {} in user configuration.'.format(key))
-    env['collection'] = MongoClient()['aws']['clusters']
+    mongo_host = env['user_config']['mongo_host']
+    mongo_port = env['user_config']['mongo_port']
+    client = MongoClient(mongo_host, mongo_port)
+    try:
+        with Halo(text='Connecting to MongoDB ...', spinner='dots'):
+            client.admin.command('ismaster')
+    except:
+        error('Cannot connect to MongoDB.')
+    env['collection'] = client['aws']['clusters']
 
 def get_user_config():
     return env['user_config']
