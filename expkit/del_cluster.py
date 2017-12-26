@@ -2,7 +2,7 @@
 import boto3
 import click
 
-import utils
+from . import utils
 
 
 def remove(cluster_name):

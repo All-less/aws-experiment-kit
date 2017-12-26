@@ -4,9 +4,9 @@ import os
 
 import click
 
-import new_cluster
-import del_cluster
-import utils
+from . import new_cluster
+from . import del_cluster
+from . import utils
 
 
 @click.group()

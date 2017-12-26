@@ -13,7 +13,7 @@ from pymongo import MongoClient
 import paramiko
 from halo import Halo
 
-import utils
+from . import utils
 
 
 def get_request_config(cluster_config):
