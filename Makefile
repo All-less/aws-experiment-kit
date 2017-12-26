@@ -1,12 +1,14 @@
-uninstall:
-	pip uninstall exp-kit
+.PHONY: clean
 
 clean:
 	rm -rf *.egg-info
 	rm -rf build dist
 
+uninstall:
+	pip uninstall -y exp-kit
+
 local-install:
-	pip install dist/exp-kit*.tar.gz
+	pip install -y --no-cache-dir dist/exp-kit*.tar.gz
 
 build:
 	python setup.py sdist bdist_wheel
@@ -15,7 +17,7 @@ test-publish:
 	twine upload -r pypitest dist/exp*
 
 test-install:
-	pip install --index-url https://test.pypi.org/simple/ exp-kit
+	pip install -y --no-cache-dir --index-url https://test.pypi.org/simple/ exp-kit
 
 publish:
 	twine upload -r pypi dist/exp*

@@ -13,7 +13,7 @@ from . import utils
 @click.group()
 @click.option('-u', '--user-config',
               type=click.Path(resolve_path=True),
-              help='Path to user configuration.',
+              help='Path to user configuration. (Default: ~/.exp-kit/config.json)',
               default=os.path.join(os.path.expanduser('~'), '.exp-kit/config.json'))
 def main(user_config):
     """
