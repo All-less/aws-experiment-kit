@@ -2,11 +2,6 @@
 
 A CLI tool facilitating experimentation on AWS.
 
-### TODO
-
-- add support for multiple instance types
-- add prerequisite checking
-
 ### Installation
 
 It is recommended to install the package with `pip`.
@@ -66,23 +61,11 @@ A sample `cluster_configuration.json` looks as follows.
 }
 ```
 
-The `instance_type` can include multiple types.
+The `instance_type` can include multiple types. They will be evenly distributed in the cluster, i.e., the number of instances of each type will roughly be the same. 
 
 ```json
 { 
     "instance_type": [ "m4.large", "m3.large", "m4.xlarge", "m3.xlarge" ]
-}
-```
-
-You can specify number of nodes for each type.
-```json
-{
-    "instance_type": {
-        "m4.large": 1, 
-        "m3.large": 2, 
-        "m4.xlarge": 3, 
-        "m3.xlarge": 4
-    }
 }
 ```
 
@@ -109,5 +92,7 @@ exp-kit ls <cluster_name>
 
 ### Under the hood
 
-1. cluster
-2. `master`
+1. A cluster is created with a spot fleet request. Therefore, you can terminate is via AWS console.
+2. By default, `master` is the first instance of the instances list stored in MongoDB.
+3. All nodes can login to each other via SSH without password.
+4. On each node, `~/machinefile` lists the IP address and hostname of all other nodes **except the `master`**.
