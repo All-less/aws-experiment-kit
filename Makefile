@@ -1,5 +1,7 @@
-clean:
+uninstall:
 	pip uninstall exp-kit
+
+clean:
 	rm -rf *.egg-info
 	rm -rf build dist
 
