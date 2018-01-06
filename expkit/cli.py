@@ -57,17 +57,16 @@ def new(cluster_config):
     default_config = {
         "name": "cluster",
         "size": 3,
-        "instance": "m4.large",
+        "instance_type": "m4.large",
         "image_id": "ami-091a3e69",
         "snapshot_id": "snap-58c483d9",
         "disk_size": 20,
-        "spot_price": 0.251
+        "spot_price": 0.251,
+        "user_name": "ec2-user"
     }
     if cluster_config is None:
-        utils.warn('No config path given. Fall back to default settings.')
-        config = {}
-    else:
-        config = utils.parse_json_file(cluster_config)
+        utils.error('No config path given.')
+    config = utils.parse_json_file(cluster_config)
     default_config.update(config)
     default_config.update(utils.get_user_config())
     new_cluster.new(default_config)
