@@ -4,6 +4,10 @@ clean:
 	rm -rf *.egg-info
 	rm -rf build dist
 
+init:
+	pipenv --three
+	pipenv install
+
 uninstall:
 	pip uninstall -y exp-kit
 
