@@ -4,10 +4,10 @@ A CLI tool facilitating experimentation on AWS.
 
 ### Installation
 
-It is recommended to install the package with `pip`.
+It is recommended to install the package with `pip3`.
 
 ```bash
-pip install exp-kit 
+pip3 install exp-kit 
 ```
 
 ### Prerequisites
@@ -47,16 +47,22 @@ exp-kit new -c cluster_configuration.json
 
 A sample `cluster_configuration.json` looks as follows.
 
-```json
+```javascript
 {
+    // identifier of the cluster
     "name": "cluster",
+    // number of nodes
     "size": 3,
     "instance_type": "m4.large",
+    // following two can be found in AMI section of EC2 page
     "image_id": "ami-a51f27c5",
     "snapshot_id": "snap-0907c7634681bc477",
+    // group_id can be found in Security Group section of EC2 page
     "security_group_id": "sg-c36280ba",
+    // size in gigabytes
     "disk_size": 20,
     "spot_price": 0.251,
+    // default username of the image
     "user_name": "ec2-user"
 }
 ```
