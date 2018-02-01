@@ -81,14 +81,15 @@ def rm(cluster_name):
 
 @main.command()
 @click.argument('cluster-name', type=str, required=False)
-def ls(cluster_name=None):
+@click.option('--ip-only', is_flag=True, help='Only display ip addresses.')
+def ls(cluster_name=None, ip_only=False):
     """
     List all cluster information.
     """
     if cluster_name is None:
         ls_cluster.ls_all()
     else:
-        ls_cluster.ls(cluster_name)
+        ls_cluster.ls(cluster_name, ip_only)
 
 if __name__ == '__main__':
     main()

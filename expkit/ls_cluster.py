@@ -15,10 +15,13 @@ def ls_all():
     table = tabulate([ [ 'name', 'size', 'request-id' ] ] + list(map(doc2entry, clusters)))
     click.echo(table)
 
-def ls(cluster_name):
+def ls(cluster_name, ip_only):
     cluster_name = utils.match_cluster_name(cluster_name)
-    with Halo(text='Loading cluster information ...', spinner='dots'):
+    with (utils.null_context() if ip_only else Halo(text='Loading cluster information ...', spinner='dots')):
         instances = utils.load_cluster_instances(cluster_name)
         entries = [ [ i.public_ip_address, i.instance_type, i.state['Name'] ] for i in instances ]
-    table = tabulate( [ [ 'ip', 'type', 'status' ] ] + entries)
-    click.echo(table)
+    if ip_only:
+        click.echo('\n'.join(e[0] for e in entries))
+    else:
+        table = tabulate( [ [ 'ip', 'type', 'status' ] ] + entries)
+        click.echo(table)

@@ -6,6 +6,7 @@ import time
 from functools import lru_cache
 import json
 import difflib
+import contextlib
 
 import click
 import boto3
@@ -148,3 +149,7 @@ def delete_cluster_information(cluster_name):
 
 def load_all_clusters():
     return list(env['collection'].find())
+
+@contextlib.contextmanager
+def null_context():
+    yield
