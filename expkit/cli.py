@@ -80,8 +80,8 @@ def rm(cluster_name):
     rm_cluster.rm(cluster_name)
 
 @main.command()
-@click.argument('cluster-name', type=str)
-def ls(cluster_name):
+@click.argument('cluster-name', type=str, required=False)
+def ls(cluster_name=None):
     """
     List all cluster information.
     """
