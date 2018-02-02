@@ -24,7 +24,8 @@ logging.getLogger('paramiko').setLevel(logging.WARN)
 env = {
     'user_config': {
         'mongo_host': 'localhost',
-        'mongo_port': 27017
+        'mongo_port': 27017,
+        'bare_output': False
     },
     'collection': None
 }
@@ -51,7 +52,7 @@ def load_user_config(path):
     mongo_port = env['user_config']['mongo_port']
     client = MongoClient(mongo_host, mongo_port)
     try:
-        with Halo(text='Connecting to MongoDB ...', spinner='dots'):
+        with halo_wrapper(text='Connecting to MongoDB ...', spinner='dots'):
             client.admin.command('ismaster')
     except:
         error('Cannot connect to MongoDB.')
@@ -149,6 +150,9 @@ def delete_cluster_information(cluster_name):
 
 def load_all_clusters():
     return list(env['collection'].find())
+
+def halo_wrapper(**kwargs):
+    return null_context() if env['user_config']['bare_output'] else Halo(**kwargs)
 
 @contextlib.contextmanager
 def null_context():
